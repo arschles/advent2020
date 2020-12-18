@@ -17,11 +17,17 @@ func (pwi *passwordInfo) isValid() bool {
 	if pwi == nil {
 		return false
 	}
-	return true // ???
+	numLetter := 0
+	for _, ch := range pwi.password {
+		if string(ch) == pwi.letter {
+			numLetter++
+		}
+	}
+	return (numLetter >= pwi.min) && (numLetter <= pwi.max)
 }
 
 func main() {
-	inputBytes, err := ioutil.ReadFile("./known.txt")
+	inputBytes, err := ioutil.ReadFile("./input.txt")
 	if err != nil {
 		log.Fatalf("Error reading input file: %s", err)
 	}
